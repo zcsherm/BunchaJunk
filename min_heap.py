@@ -43,24 +43,56 @@ class MinHeap:
         """
         TODO: Write this implementation
         """
-        pass
+        # Append the value to the dynamic array
+        self._heap.append(node)
+        index = self._heap.length()-1
+        if index == 0:
+            return
+        parent_index = (index-1)/2
+        parent_value = self._heap.get_at_index(parent_index)
+        # Find the parent
+        while parent_value > node and index != 0:
+            # Compare the parent value to the new node value and swap if needed
+            self._heap.set_at_index(index,parent_value)
+            self._heap.set_at_index(parent_index,node)
+
+            # Get the new parent info if this node isn't the root
+            index = parent_index
+            if index != 0:
+                parent_index = (index-1)/2
+                parent_value = self._heap.get_at_index(parent_index)
+        
 
     def is_empty(self) -> bool:
         """
         TODO: Write this implementation
         """
-        pass
+        if self._heap.length() == 0:
+            return True
+        return False
 
     def get_min(self) -> object:
         """
         TODO: Write this implementation
         """
-        pass
+        # Check for emptiness
+        if not self.is_empty():
+            raise MinHeapException
+        return self._heap.get_at_index(0)
+        
 
     def remove_min(self) -> object:
         """
         TODO: Write this implementation
         """
+        # Get the min value to return
+        min = self.get_min()
+        # Set the root to the last node
+        self._heap.set_at_index(0,self._heap.get_at_index(self.length()-1))
+        # Delete the last node
+        self._heap.remove_at_index(self.length()-1)
+
+        # propogate downwards
         pass
 
     def build_heap(self, da: DynamicArray) -> None:
