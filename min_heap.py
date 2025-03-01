@@ -129,6 +129,17 @@ def _percolate_down(da: DynamicArray, parent: int) -> None:
     """
     TODO: Write your implementation
     """
+    perc_down_value = da.get_at_index(parent)
+    child_one_index =  (2*parent)+1 
+    child_two_index = (2*parent)+2
+    while child_one_index < da.length()-1 and child_two_index < da.length()-1:
+        if da.get_at_index(child_one_index)<da.get_at_index(child_two_index):
+            swap_index = child_one_index
+        else:
+            swap_index = child_two_index
+        if perc_down_value > da.get_at_index(child_one_index):
+            # Swap values
+            da.set_at_index(parent, da.get_at_index(chil
     pass
 
 
