@@ -1,1 +1,40 @@
 asm
+Goals:
+  Read temperature from file
+  Output in reverse order
+  Use 3 macros for I/O:
+      mGetString - Display a prompt and save the input (need length limit)
+      mDisplayString - Print the string in a memory location
+      mDisplayChar - print an ASCII character provided as immediate
+  2 procedures using string primitives:
+      ParseTempsFromString - Get from the fileBuffer every string format integer and save it as an SDWORD to an array
+      WriteTempsReverse - print the array in reverse order using mDisplayChar to print a delimiter
+
+  MAIN:
+        1- invoke mGetString to getfilename
+        2- Open the file and read the contents into a file buffer
+        3- ParseTempFromString to parse the first line of temp readings and store
+        4- WriteTempsReverse
+
+  EC
+        1- Handle multiple line input files. Each line terminated with a carriage return char, followed by line feed
+        2- Implement WriteVal:
+              Converts to ASCII format string, invoke mDisplay macro to write to the window. (REplace WriteDec/WriteInt)
+
+
+
+    EC2
+      Have a global empty byte array of length 4 (for -100-+200)
+      Check sign:
+          if negative put - in first space
+          Else space
+      Loop 3 times:
+          Div 100
+          if Q > 0:
+              Add 48 and move to array
+          MOV R to EAX
+          DIV  10
+          if Q >0:
+              Add 48 and move to array
+          if R >0:
+              Add 48 move to Array.  
